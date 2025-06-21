@@ -7,21 +7,33 @@ from PIL import Image
 from tensorflow.keras.models import load_model
 from tensorflow.keras.applications.vgg16 import preprocess_input
 
-# Step 3: Configurations
+import requests
+import os
 UPLOAD_FOLDER = '/tmp/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Load model (make sure the file is uploaded to /content/)
-# Note: Ensure your model file "/content/DiseaseDetection.h5" exists.
-# If not, you will need to save the trained model first.
+model_path = "DiseaseDetection.h5"
+model_url = "https://www.dropbox.com/scl/fi/rbs14po9beicprvw3jgjw/DiseaseDetection.h5?rlkey=83l7u1bt9enjckmijok2hfdzx&st=2zgrprdm&dl=1"
 
-print("Current files in directory:", os.listdir())
+if not os.path.exists(model_path):
+    print("Downloading model from Dropbox...")
+    try:
+        r = requests.get(model_url)
+        r.raise_for_status()
+        with open(model_path, 'wb') as f:
+            f.write(r.content)
+        print(f"✅ Model downloaded successfully. Size: {os.path.getsize(model_path)} bytes")
+    except Exception as e:
+        print(f"❌ Failed to download model: {e}")
 
-try:
-    model = load_model("DiseaseDetection.h5")
-except Exception as e:
-    print(f"Error loading model: {e}")
+# Load the model after download
+model = load_model(model_path)
+
+# try:
+#     model = load_model("DiseaseDetection.h5")
+# except Exception as e:
+#     print(f"Error loading model: {e}")
     # Handle the error, e.g., exit or load a dummy model
     # For demonstration, we'll print the error and continue, but in a real app,
     # you'd want to handle this more robustly.
