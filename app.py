@@ -14,7 +14,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 model_path = "DiseaseDetection.h5"
-model_url = "https://www.dropbox.com/scl/fi/rbs14po9beicprvw3jgjw/DiseaseDetection.h5?rlkey=83l7u1bt9enjckmijok2hfdzx&st=2zgrprdm&dl=1"
+model_url = "https://wwhttps://www.dropbox.com/scl/fi/rbs14po9beicprvw3jgjw/DiseaseDetection.h5?rlkey=83l7u1bt9enjckmijok2hfdzx&st=dvapbaqr&dl=0"
 
 if not os.path.exists(model_path):
     print("Downloading model from Dropbox...")
