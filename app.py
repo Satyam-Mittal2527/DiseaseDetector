@@ -15,6 +15,9 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # Load model (make sure the file is uploaded to /content/)
 # Note: Ensure your model file "/content/DiseaseDetection.h5" exists.
 # If not, you will need to save the trained model first.
+
+print("Current files in directory:", os.listdir())
+
 try:
     model = load_model("DiseaseDetection.h5")
 except Exception as e:
