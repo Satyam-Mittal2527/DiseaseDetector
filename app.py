@@ -29,6 +29,9 @@ if not os.path.exists(model_path):
 
 # Load the model after download
 model = load_model(model_path)
+with open("DiseaseDetection.h5", "rb") as f:
+    head = f.read(8)
+    print("File header:", head)
 
 # try:
 #     model = load_model("DiseaseDetection.h5")
